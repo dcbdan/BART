@@ -1,4 +1,4 @@
-Package: BARTMOD
+Package: BART
 Type: Package
 Title: Bayesian Additive Regression Trees
 Version: 0.1

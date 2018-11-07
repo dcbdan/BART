@@ -1,4 +1,4 @@
-library(BART, lib.loc = "~/ps/BART/bld")
+library(BART)
 library(coda)
 
 f_quantile = function(x){ quantile(x, probs = c(0.025, 0.975)) }
@@ -64,25 +64,23 @@ plot_f = function(x, f, post_f)
 #######################################################
 
 #######################################################
-# run straight bart
-bt = wbart(cbind(u, v), y, nskip = n_burn, ndpost = n_post, numcut = 5, ntree=15)
-
-par(mfrow = c(1,3))
-plot_errors(predict(bt, cbind(u, v)), true_beta1 + true_beta2)
-plot_errors(predict(bt, cbind(utest, vtest)), true_utest + true_vtest)
-plot_f(utest[,1], true_utest + true_vtest, predict(bt, cbind(utest, vtest)))
+#  # run straight bart
+#  bt = wbart(cbind(u, v), y, nskip = n_burn, ndpost = n_post, numcut = 5, ntree=15)
+#
+#  par(mfrow = c(1,3))
+#  plot_errors(predict(bt, cbind(u, v)), true_beta1 + true_beta2)
+#  plot_errors(predict(bt, cbind(utest, vtest)), true_utest + true_vtest)
+#  plot_f(utest[,1], true_utest + true_vtest, predict(bt, cbind(utest, vtest)))
 #######################################################
 
 #######################################################
 # run sampler with two barts -- one for u, one for v
 sampler = function(u, v, y, n_burn, n_post)
 {
-  beta1_modbart = open_modbart(u, sigest = 1.0, k = 2.0, numcut = 10, ntree = 5,
-                               cont = TRUE, usequants = TRUE)
-  beta2_modbart = open_modbart(v, sigest = 1.0, k = 2.0, numcut = 10, ntree = 20,
-                               cont = TRUE, usequants = TRUE)
+  beta1_modbart = open_modbart(u, k = 2.0, numcut = 10, ntree = 5)
+  beta2_modbart = open_modbart(v, k = 2.0, numcut = 10, ntree = 20)
 
-  s2e = var(y)
+  s2e = var(y)/10
   beta1 = rep(0, nN)
   beta2 = rep(0, nN)
 
@@ -95,8 +93,10 @@ sampler = function(u, v, y, n_burn, n_post)
   for(idx in 1:(n_burn+n_post)){
     take_sample = idx > n_burn
 
-    beta1 = sample_modbart(beta1_modbart, y - beta2, save_draw = take_sample)$out
-    beta2 = sample_modbart(beta2_modbart, y - beta1, save_draw = take_sample)$out
+    beta1 = sample_modbart(
+      beta1_modbart, y - beta2, sqrt(s2e), save_draw = take_sample)
+    beta2 = sample_modbart(
+      beta2_modbart, y - beta1, sqrt(s2e), save_draw = take_sample)
 
     stopifnot(all(is_good_out(beta1)))
     stopifnot(all(is_good_out(beta2)))

@@ -9,8 +9,8 @@ extern SEXP clbart(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, S
 extern SEXP cmbart(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP cpwbart(SEXP, SEXP, SEXP);
 extern SEXP cwbart(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP copen_modbart(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
-extern SEXP csample_modbart(SEXP,SEXP,SEXP,SEXP,SEXP);
+extern SEXP copen_modbart(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+extern SEXP csample_modbart(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
 extern SEXP cconvert_modbart(SEXP);
 //extern SEXP cclose_modbart(SEXP);
 extern SEXP cgbart(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -28,8 +28,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"cmbart",  (DL_FUNC) &cmbart,  28},
     {"cpwbart", (DL_FUNC) &cpwbart,  3},
     {"cwbart",  (DL_FUNC) &cwbart,  31},
-    {"copen_modbart", (DL_FUNC) &copen_modbart, 22},
-    {"csample_modbart", (DL_FUNC) &csample_modbart, 5},
+    {"copen_modbart", (DL_FUNC) &copen_modbart, 17},
+    {"csample_modbart", (DL_FUNC) &csample_modbart, 6},
     {"cconvert_modbart", (DL_FUNC) &cconvert_modbart, 1},
 //    {"cclose_modbart", (DL_FUNC) &cclose_modbart, 1},
     {"cgbart",  (DL_FUNC) &cgbart,  30},
