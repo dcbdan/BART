@@ -22,7 +22,7 @@ small amount to the overall fit.
 \usage{
 open_modbart=function(
   x,
-  offset=0.0,#how much to offset the y data by
+  offset=0.0,
   sparse=FALSE, theta=0, omega=1,
   a=0.5, b=1, augment=FALSE, rho=NULL,
   xinfo=matrix(0.0,0,0), usequants=FALSE,
@@ -80,7 +80,8 @@ open_modbart=function(
    Base parameter for tree prior.
    }
    \item{sigmaf}{
-   The SD of f.
+   The SD of f. If training data \eqn{y} is available, a reasonable initial value is
+   \eqn{max(y)-min(y)}.
    }
    \item{ntree}{
    The number of trees in the sum.

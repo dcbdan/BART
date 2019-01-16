@@ -214,7 +214,7 @@ RcppExport SEXP cconvert_modbart(
 
   std::stringstream treess;
   treess.precision(10);
-  treess << trees.size() << " " << bm.getm() << " " << p << endl;
+  treess << trees.size()/bm.getm() << " " << bm.getm() << " " << p << endl;
   for(tree const& a_tree: trees)
   {
     treess << a_tree;
